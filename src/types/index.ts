@@ -1,3 +1,5 @@
+import { Models } from 'appwrite';
+
 export type INavLink = {
   imgURL: string;
   route: string;
@@ -54,4 +56,14 @@ export type IContextType = {
   isAuthenticated: boolean;
   setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>;
   checkAuthUser: () => Promise<boolean>;
+};
+
+export type FileUploaderProps = {
+  fieldChange: (FILES: File[]) => void,
+  mediaUrl: string,
+};
+
+export type PostFormProps = {
+  post?: Models.Document,
+  action: 'Create' | 'Update',
 };
