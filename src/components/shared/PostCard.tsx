@@ -24,7 +24,7 @@ function PostCard({ post }:PostCardProps) {
           </div>
         </div>
 
-        {user.id !== post.creator.$id && (
+        {user.id === post.creator.$id && (
           <Link to={`/update-post/${post.$id}`}>
             <img src="/assets/icons/edit.svg" alt="Edit icon" width={20} height={20} />
           </Link>
