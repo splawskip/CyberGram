@@ -4,6 +4,7 @@ import * as z from 'zod';
 
 import { Models } from 'appwrite';
 import { useNavigate } from 'react-router-dom';
+import { Loader } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -19,11 +20,13 @@ import FileUploader from '../shared/FileUploader';
 import { PostUploadValidation } from '@/lib/validation';
 import { useUserContext } from '@/context/AuthContext';
 import { useToast } from '../ui/use-toast';
-import { useCreatePost } from '@/lib/react-query/queriesAndMutations';
+import { useCreatePost, useUpdatePost } from '@/lib/react-query/queriesAndMutations';
 import { PostFormProps } from '@/types';
 
 function PostForm({ post, action }: PostFormProps) {
-  const { mutateAsync: createPost } = useCreatePost();
+  const { mutateAsync: createPost, isPending: isCreating } = useCreatePost();
+  const { mutateAsync: updatePost, isPending: isUpdating } = useUpdatePost();
+
   const { user } = useUserContext();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -40,6 +43,17 @@ function PostForm({ post, action }: PostFormProps) {
   // Handle form submit.
   async function onSubmit(values: z.infer<typeof PostUploadValidation>) :
   Promise<Models.Document | undefined> {
+    if (post && action === 'Update') {
+      const updatedPost = updatePost({
+        ...values, postId: post.$id, imageId: post?.imageId, imageUrl: post?.imageUrl,
+      });
+      if (updatedPost) {
+        navigate(`/posts/${post.$id}`);
+        return updatedPost;
+      }
+      toast({ title: 'Unable to perform post update.' });
+      return undefined;
+    }
     // Create post.
     const newPost = await createPost({ ...values, userId: user.id });
     // If we got a post navigate to the homepage.
@@ -109,8 +123,13 @@ function PostForm({ post, action }: PostFormProps) {
           )}
         />
         <div className="flex gap-4 items-center justify-end">
-          <Button type="button" className="shad-button_dark_4">Cancel</Button>
-          <Button type="submit" className="shad-button_primary whitespace-nowrap">Submit</Button>
+          <Button type="button" className="shad-button_dark_4" disabled={isCreating || isUpdating}>Cancel</Button>
+          <Button type="submit" className="shad-button_primary whitespace-nowrap" disabled={isCreating || isUpdating}>
+            {(isCreating || isUpdating) && <Loader />}
+            {action}
+            {' '}
+            Post
+          </Button>
         </div>
       </form>
     </Form>
