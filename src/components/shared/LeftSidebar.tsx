@@ -30,7 +30,7 @@ function LeftSidebar() {
           />
         </Link>
         <Link to={`/profile/${user.id}`} className="flex gap-3 item-center">
-          <img src={user.imageUrl ?? '/assets/images/profile.png'} alt="User avatar" className="h-14 w-14 rounded-full" />
+          <img src={user.imageUrl ?? '/assets/icons/profile-placeholder.svg'} alt="User avatar" className="h-14 w-14 rounded-full" />
           <div className="flex flex-col">
             <p className="body-bold">
               {user.name}
