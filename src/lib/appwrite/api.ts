@@ -1,5 +1,5 @@
 import { ID, Query } from 'appwrite';
-import { INewPost, INewUser } from '@/types';
+import { INewPost, INewUser, IUpdatePost } from '@/types';
 import {
   account, appwriteConfig, avatars, databases, storage,
 } from './config';
@@ -232,5 +232,90 @@ export async function deleteSavedPost(savedId:string) {
     return updatedPost;
   } catch (error) {
     throw new Error('Unable to remove post from the saves');
+  }
+}
+
+export async function getPostById(postId:string) {
+  try {
+    // Get post.
+    const post = await databases.getDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.postsCollectionId,
+      postId,
+    );
+    if (!post) {
+      throw new Error('Unable to get post by id.');
+    }
+    // If we got it, spit it out.
+    return post;
+  } catch (error) {
+    throw new Error('Unable to get post by id');
+  }
+}
+
+export async function updatePost(post :IUpdatePost) {
+  const hasFileToUpdate = post.file.length > 0;
+  try {
+    let image = {
+      imageUrl: post.imageUrl,
+      imageId: post.imageId,
+    };
+
+    if (hasFileToUpdate) {
+      // Get uploaded file.
+      const uploadedFile = await uploadFile(post.file[0]);
+      // Throw if upload failed.
+      if (!uploadedFile) {
+        throw new Error('Unable to upload a file.');
+      }
+      // Get file preview url.
+      const fileUrl = getFilePreview(uploadedFile.$id);
+      // If file is broken, delete it from DB and throw.
+      if (!fileUrl) {
+        deleteFile(uploadedFile.$id);
+        throw new Error('Unable to process broken file.');
+      }
+
+      image = { ...image, imageUrl: fileUrl, imageId: uploadedFile.$id };
+    }
+    // Convert tags into an array.
+    const tags = post.tags?.replace(/ /g, '').split(',') ?? [];
+    // Inser post into DB.
+    const updatedPost = await databases.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.postsCollectionId,
+      post.postId,
+      {
+        caption: post.caption,
+        imageUrl: image.imageUrl,
+        imageId: image.imageId,
+        location: post.location,
+        tags,
+      },
+    );
+    // If post edit was unsuccesful, clear its entry inside DB and throw.
+    if (!updatedPost) {
+      await deleteFile(post.imageId);
+      throw new Error('Unable to perform post update.');
+    }
+    // Return updated post.
+    return updatedPost;
+  } catch (error) {
+    throw new Error('Unable to perform post edit.');
+  }
+}
+
+export async function deletePost(postId:string, imageId:string) {
+  if (!postId || !imageId) throw new Error('Insufficient data to perform delete action');
+
+  try {
+    await databases.deleteDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.postsCollectionId,
+      postId,
+    );
+    return { status: 'ok' };
+  } catch (error) {
+    throw new Error('Unable to delete post.');
   }
 }
