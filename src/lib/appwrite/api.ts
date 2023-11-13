@@ -176,3 +176,61 @@ export async function getRecentPosts() {
   // Return posts.
   return posts;
 }
+
+export async function likePost(postId: string, likesArray: string[]) {
+  try {
+    // Update likes record of given post.
+    const updatedPost = await databases.updateDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.postsCollectionId,
+      postId,
+      {
+        likes: likesArray,
+      },
+    );
+    // If there is not liked post, throw.
+    if (!updatedPost) throw new Error('Unable to like a post');
+    // Return liked post.
+    return updatedPost;
+  } catch (error) {
+    throw new Error('Unable to like a post');
+  }
+}
+
+export async function savePost(postId: string, userId:string | undefined) {
+  try {
+    // Update likes record of given post.
+    const updatedPost = await databases.createDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.savesCollectionId,
+      ID.unique(),
+      {
+        user: userId,
+        post: postId,
+      },
+    );
+    // If there is not liked post, throw.
+    if (!updatedPost) throw new Error('Unable to save a post');
+    // Return liked post.
+    return updatedPost;
+  } catch (error) {
+    throw new Error('Unable to save a post');
+  }
+}
+
+export async function deleteSavedPost(savedId:string) {
+  try {
+    // Update likes record of given post.
+    const updatedPost = await databases.deleteDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.savesCollectionId,
+      savedId,
+    );
+    // If there is not liked post, throw.
+    if (!updatedPost) throw new Error('Unable to remove post from the saves');
+    // Return liked post.
+    return updatedPost;
+  } catch (error) {
+    throw new Error('Unable to remove post from the saves');
+  }
+}

@@ -67,3 +67,7 @@ export type PostFormProps = {
   post?: Models.Document,
   action: 'Create' | 'Update',
 };
+
+export type PostCardProps = {
+  post: Models.Document;
+};
