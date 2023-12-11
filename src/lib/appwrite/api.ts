@@ -1,4 +1,4 @@
-import { ID, Query } from 'appwrite';
+import { ID, Models, Query } from 'appwrite';
 import { INewPost, INewUser, IUpdatePost } from '@/types';
 import {
   account, appwriteConfig, avatars, databases, storage,
@@ -76,6 +76,40 @@ export async function getCurrentUser() {
     return currentUser.documents[0];
   } catch (error) {
     throw new Error('Unable to get current user.');
+  }
+}
+
+export async function getUserById(userId:string) {
+  try {
+    // Get post.
+    const user = await databases.getDocument(
+      appwriteConfig.databaseId,
+      appwriteConfig.usersCollectionId,
+      userId,
+    );
+    if (!user) {
+      throw new Error('Unable to get user by id.');
+    }
+    // If we got it, spit it out.
+    return user;
+  } catch (error) {
+    throw new Error('Unable to get user by id');
+  }
+}
+
+export async function getAllUsers() {
+  try {
+    // Get current user.
+    const users = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.usersCollectionId,
+    );
+    // Bail if user was not found.
+    if (!users) throw new Error('Unable to get users.');
+    // Return first entry for the user.
+    return users;
+  } catch (error) {
+    throw new Error('Unable to get current users.');
   }
 }
 
@@ -175,6 +209,19 @@ export async function getRecentPosts() {
   }
   // Return posts.
   return posts;
+}
+
+export async function getUserPosts(user:Models.Document | undefined) {
+  // Get recent posts.;
+  if (!user) {
+    throw new Error('No user.');
+  }
+  // If posts are missing throw.
+  if (!user.posts) {
+    throw new Error('Unable to retrieve user posts.');
+  }
+  // Return posts.
+  return user.posts;
 }
 
 export async function likePost(postId: string, likesArray: string[]) {
@@ -317,5 +364,58 @@ export async function deletePost(postId:string, imageId:string) {
     return { status: 'ok' };
   } catch (error) {
     throw new Error('Unable to delete post.');
+  }
+}
+
+export async function getInfinitePosts({ pageParam }: { pageParam: string }) {
+  const queries = [Query.orderDesc('$updatedAt'), Query.limit(10)];
+
+  if (pageParam) {
+    queries.push(Query.cursorAfter(pageParam.toString()));
+  }
+
+  try {
+    const posts = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.postsCollectionId,
+      queries,
+    );
+    if (!posts) {
+      throw new Error('No posts');
+    }
+    return posts;
+  } catch (error) {
+    throw new Error(`Unable to get posts due to: ${error}`);
+  }
+}
+
+export async function searchPosts(searchTerm: string) {
+  try {
+    const posts = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.postsCollectionId,
+      [Query.search('caption', searchTerm)],
+    );
+    if (!posts) {
+      throw new Error('No posts');
+    }
+    return posts;
+  } catch (error) {
+    throw new Error(`Unable to get posts due to: ${error}`);
+  }
+}
+
+export async function getCurrentUserSavedPosts() {
+  try {
+    const currentUser = await getCurrentUser();
+    if (!currentUser) {
+      throw new Error('Unable to get current user.');
+    }
+    const currentUserSavedPosts = currentUser.save.map(
+      (savedPost:Models.Document) => savedPost?.post,
+    ) ?? [];
+    return currentUserSavedPosts;
+  } catch (error) {
+    throw new Error(`Unable to get posts due to: ${error}`);
   }
 }
