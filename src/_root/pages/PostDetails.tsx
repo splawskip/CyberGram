@@ -1,25 +1,32 @@
 import { Loader } from 'lucide-react';
-import { useParams, Link } from 'react-router-dom';
-import { useGetPostById } from '@/lib/react-query/queriesAndMutations';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useGetPostById, useDeletePost } from '@/lib/react-query/queriesAndMutations';
 import { getRelativeTime } from '@/lib/utils';
 import { useUserContext } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
 import PostStats from '@/components/shared/PostStats';
 
 function PostDetails() {
+  const navigate = useNavigate();
   const { id } = useParams();
-  const { data: post, isPending } = useGetPostById(id ?? '');
   const { user } = useUserContext();
-  const handleDeletePost = () => {};
+  const { data: post, isPending } = useGetPostById(id ?? '');
+  const { mutate: deletePost } = useDeletePost();
+
+  const handleDeletePost = () => {
+    deletePost({ postId: id ?? '', imageId: post?.imageId });
+    navigate(-1);
+  };
+
   return (
     <div className="post_details-container">
       {isPending ? <Loader /> : (
         <div className="post_details-card">
-          <img src={post?.imageUrl} alt="Post" className="post_details-img" />
+          <img loading="lazy" src={post?.imageUrl} alt="Post" className="post_details-img" />
           <div className="post_details-info">
             <div className="flex-between w-full">
               <Link to={`/profile/${post?.creator.$id}`} className="flex items-center gap-3">
-                <img src={post?.creator?.imageUrl ?? '/assets/icons/profile-placeholder.svg'} className="rounded-full w-8 h-8 lg:h-12 lg:w-12" alt="Creator avatar" />
+                <img loading="lazy" src={post?.creator?.imageUrl ?? '/assets/icons/profile-placeholder.svg'} className="rounded-full w-8 h-8 lg:h-12 lg:w-12" alt="Creator avatar" />
 
                 <div className="flex flex-col">
                   <p className="base-medium lg:body-bold text-light-1">{post?.creator.name}</p>
@@ -33,10 +40,10 @@ function PostDetails() {
               {user.id === post?.creator.$id && (
                 <div className="flex-center gap-1">
                   <Link to={`/update-post/${post?.$id}`}>
-                    <img src="/assets/icons/edit.svg" alt="Edit icon" width={24} height={24} />
+                    <img loading="lazy" src="/assets/icons/edit.svg" alt="Edit icon" width={24} height={24} />
                   </Link>
                   <Button onClick={handleDeletePost} variant="ghost" className="ghost_details-delete_btn">
-                    <img src="/assets/icons/delete.svg" alt="Delete icon" width={24} height={24} />
+                    <img loading="lazy" src="/assets/icons/delete.svg" alt="Delete icon" width={24} height={24} />
                   </Button>
                 </div>
               )}
