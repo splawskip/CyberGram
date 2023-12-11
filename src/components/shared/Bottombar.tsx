@@ -14,7 +14,7 @@ function Bottombar() {
         // Render nav item.
         return (
           <NavLink key={link.label} to={link.route} className={`flex-center flex-col gap-1 p-2 transition ${isCurrent && 'bg-primary-500 rounded-[10px]'}`}>
-            <img src={link.imgURL} alt={link.label} width={16} height={16} className={`${isCurrent && 'invert-white'}`} />
+            <img loading="lazy" src={link.imgURL} alt={link.label} width={16} height={16} className={`${isCurrent && 'invert-white'}`} />
             <p className="tiny-medium text-light-2">{link.label}</p>
           </NavLink>
         );

@@ -23,6 +23,7 @@ function LeftSidebar() {
       <div className="flex flex-col gap-11">
         <Link to="/" className="flex gap-3 items-center">
           <img
+            loading="lazy"
             src="/assets/images/logo.svg"
             alt="logo"
             width={170}
@@ -30,7 +31,7 @@ function LeftSidebar() {
           />
         </Link>
         <Link to={`/profile/${user.id}`} className="flex gap-3 item-center">
-          <img src={user.imageUrl ?? '/assets/icons/profile-placeholder.svg'} alt="User avatar" className="h-14 w-14 rounded-full" />
+          <img loading="lazy" src={user.imageUrl ?? '/assets/icons/profile-placeholder.svg'} alt="User avatar" className="h-14 w-14 rounded-full" />
           <div className="flex flex-col">
             <p className="body-bold">
               {user.name}
@@ -49,7 +50,7 @@ function LeftSidebar() {
             return (
               <li className={`group ${isCurrent && 'bg-primary-500'} leftsidebar-link`} key={link.label}>
                 <NavLink to={link.route} className="flex gap-4 item-center p-4">
-                  <img src={link.imgURL} alt={link.label} className={`group-hover:invert-white ${isCurrent && 'invert-white'}`} />
+                  <img loading="lazy" src={link.imgURL} alt={link.label} className={`group-hover:invert-white ${isCurrent && 'invert-white'}`} />
                   {link.label}
                 </NavLink>
               </li>
@@ -58,7 +59,7 @@ function LeftSidebar() {
         </ul>
       </div>
       <Button variant="ghost" className="shad-button_ghost" onClick={() => signOut}>
-        <img src="/assets/icons/logout.svg" alt="logout" />
+        <img loading="lazy" src="/assets/icons/logout.svg" alt="logout" />
         <p className="small-medium lg:base-medium">Logout</p>
       </Button>
     </nav>

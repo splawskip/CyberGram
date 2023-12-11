@@ -59,13 +59,13 @@ function PostStats({ post, userId } : PostStatsProps) {
     <div className="flex justify-between items-center z-20">
       <div className="flex gap-2 mr-5">
         <button type="button" onClick={handleLikePost}>
-          {isSaving || isDeleting ? <Loader /> : <img src={`/assets/icons/like${checkIsLiked(likes, userId) ? 'd' : ''}.svg`} alt="Like icon" width={20} height={20} className="cursor-pointer" />}
+          {isSaving || isDeleting ? <Loader /> : <img loading="lazy" src={`/assets/icons/like${checkIsLiked(likes, userId) ? 'd' : ''}.svg`} alt="Like icon" width={20} height={20} className="cursor-pointer" />}
         </button>
         <p className="small-medium lg:base-medium">{likes.length}</p>
       </div>
       <div className="flex gap-2">
         <button type="button" onClick={handleSavePost}>
-          {isSaving || isDeleting ? <Loader /> : <img src={`/assets/icons/save${isSaved ? 'd' : ''}.svg`} alt="Save icon" width={20} height={20} className="cursor-pointer" />}
+          {isSaving || isDeleting ? <Loader /> : <img loading="lazy" src={`/assets/icons/save${isSaved ? 'd' : ''}.svg`} alt="Save icon" width={20} height={20} className="cursor-pointer" />}
         </button>
       </div>
     </div>
