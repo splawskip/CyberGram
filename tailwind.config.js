@@ -15,14 +15,12 @@ export default {
       padding: '2rem',
       screens: {
         '2xl': '1400px',
-
       },
     },
     extend: {
       colors: {
-        'primary-500': '#877EFF',
-        'primary-600': '#5D5FEF',
-        'secondary-500': '#FFB620',
+        'primary-500': '#FCEE0A',
+        'secondary-500': '#00F0FF',
         'off-white': '#D0DFFF',
         red: '#FF5A5A',
         'dark-1': '#000000',
@@ -31,12 +29,11 @@ export default {
         'dark-4': '#1F1F22',
         'light-1': '#FFFFFF',
         'light-2': '#EFEFEF',
-        'light-3': '#7878A3',
-        'light-4': '#5C5C7B',
+        'light-3': '#a3a179',
+        'light-4': '#7a795b',
       },
       screens: {
         xs: '480px',
-
       },
       width: {
         420: '420px',
@@ -44,7 +41,6 @@ export default {
       },
       fontFamily: {
         inter: ['Inter', 'sans-serif'],
-
       },
       keyframes: {
         'accordion-down': {
