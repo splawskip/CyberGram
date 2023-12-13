@@ -5,6 +5,7 @@ import UsersGrid from '@/components/shared/UsersGrid';
 function AllUsers() {
   // Get users.
   const { data: users, isPending } = useGetAllUsers();
+  // Build component.
   return (
     <div className="flex flex-1">
       <div className="common-container">

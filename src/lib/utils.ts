@@ -1,15 +1,27 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
+/**
+ * Combines and merges class names using the `clsx` and `twMerge` utilities.
+ *
+ * @param inputs - An array of class values to be combined.
+ * @returns A string representing the merged class names.
+ */
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+/**
+ * Calculates and returns the relative time elapsed since a given timestamp.
+ *
+ * @param timestamp - The timestamp to calculate relative time from.
+ * @returns A string indicating the relative time.
+ */
 export function getRelativeTime(timestamp: string): string {
   const now = new Date();
   const date = new Date(timestamp);
   const secondsAgo = Math.floor((now.getTime() - date.getTime()) / 1000);
-  // Resolve.
+  // Resolve relative time.
   if (secondsAgo < 5) {
     return 'just now';
   } if (secondsAgo < 60) {
@@ -31,4 +43,11 @@ export function getRelativeTime(timestamp: string): string {
   return `${yearsAgo} year${yearsAgo === 1 ? '' : 's'} ago`;
 }
 
+/**
+ * Checks if a user is included in the list of likes.
+ *
+ * @param likeList - Array of user IDs who liked an item.
+ * @param userId - The user ID to check for in the like list.
+ * @returns A boolean indicating whether the user has liked the item.
+ */
 export const checkIsLiked = (likeList: string[], userId: string) => likeList.includes(userId);

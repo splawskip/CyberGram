@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useInView } from 'react-intersection-observer';
 import { Input } from '@/components/ui/input';
 import SearchResults from '@/components/shared/SearchResults';
@@ -8,18 +8,23 @@ import useDebounce from '@/hooks/useDebounce';
 import Loader from '@/components/shared/Loader';
 
 function Explore() {
+  // Get intersection observer tools.
   const { ref, inView } = useInView();
+  // Get data fetching tools.
   const { data: posts, fetchNextPage, hasNextPage } = useGetPosts();
-
+  // Create stateful variable for current search value.
   const [searchValue, setSearchValue] = React.useState('');
+  // Debounce modifications of current search value.
   const debouncedValue = useDebounce(searchValue, 500);
+  // Search for requested posts.
   const { data: searchedPosts, isPending: isSearching } = useSearchPosts(debouncedValue);
-  useEffect(() => {
+  // Fetch another piece of posts if our ref is in view.
+  React.useEffect(() => {
     if (inView && !searchValue) {
       fetchNextPage();
     }
   }, [inView, searchValue, fetchNextPage]);
-
+  // Show loader if posts are missing.
   if (!posts) {
     return (
       <div className="flex-center w-full h-full">
@@ -27,11 +32,11 @@ function Explore() {
       </div>
     );
   }
-
+  // Create some logical helpers.
   const shouldShowSearchResults = searchValue !== '';
   const shouldShowPosts = !shouldShowSearchResults
   && posts?.pages.every((item) => item.documents.length === 0);
-
+  // Build component.
   return (
     <div className="explore-container">
       <div className="explore-inner_container">
@@ -61,6 +66,7 @@ function Explore() {
           <GridPostList key={crypto.randomUUID()} posts={item.documents} />
         ))}
       </div>
+
       {hasNextPage && !searchValue && (
         <div ref={ref} className="mt-10">
           <Loader />

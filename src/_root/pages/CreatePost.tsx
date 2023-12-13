@@ -1,6 +1,7 @@
 import PostForm from '@/components/forms/PostForm';
 
 function CreatePost() {
+  // Build component.
   return (
     <div className="flex flex-1">
       <div className="common-container">

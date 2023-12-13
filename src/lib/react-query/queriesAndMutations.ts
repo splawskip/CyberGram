@@ -26,18 +26,38 @@ import {
 import { INewPost, INewUser, IUpdatePost } from '@/types';
 import { QUERY_KEYS } from './queryKeys';
 
+/**
+ * Custom hook for creating a new user account.
+ *
+ * @returns An object with the mutation function for creating a user account.
+ */
 export const useCreateUserAccount = () => useMutation({
   mutationFn: (user: INewUser) => createUserAccount(user),
 });
 
+/**
+ * Custom hook for signing in to a user account.
+ *
+ * @returns An object with the mutation function for signing in.
+ */
 export const useSignInAccount = () => useMutation({
   mutationFn: (user: { email:string, password: string }) => signInAccount(user),
 });
 
+/**
+ * Custom hook for signing out of the current user's account.
+ *
+ * @returns An object with the mutation function for signing out.
+ */
 export const useSignOutAccount = () => useMutation({
   mutationFn: signOutAccount,
 });
 
+/**
+ * Custom hook for creating a new post.
+ *
+ * @returns An object with the mutation function for creating a post.
+ */
 export const useCreatePost = () => {
   const queryClient = useQueryClient();
   return useMutation({
@@ -50,11 +70,20 @@ export const useCreatePost = () => {
   });
 };
 
+/**
+ * Custom hook for getting recent posts.
+ * @returns An object with the query function for getting recent posts.
+ */
 export const useGetRecentPosts = () => useQuery({
   queryKey: [QUERY_KEYS.GET_RECENT_POSTS],
   queryFn: getRecentPosts,
 });
 
+/**
+ * Custom hook for liking a post.
+ *
+ * @returns An object with the mutation function for liking a post.
+ */
 export const useLikePost = () => {
   const queryClient = useQueryClient();
   return useMutation({
@@ -77,6 +106,11 @@ export const useLikePost = () => {
   });
 };
 
+/**
+ * Custom hook for saving a post.
+ *
+ * @returns An object with the mutation function for saving a post.
+ */
 export const useSavePost = () => {
   const queryClient = useQueryClient();
   return useMutation({
@@ -96,6 +130,11 @@ export const useSavePost = () => {
   });
 };
 
+/**
+ * Custom hook for deleting a saved post.
+ *
+ * @returns An object with the mutation function for deleting a saved post.
+ */
 export const useDeleteSavePost = () => {
   const queryClient = useQueryClient();
   return useMutation({
@@ -114,34 +153,67 @@ export const useDeleteSavePost = () => {
   });
 };
 
+/**
+ * Custom hook for getting the current user.
+ *
+ * @returns An object with the query function for getting the current user.
+ */
 export const useGetCurrentUser = () => useQuery({
   queryKey: [QUERY_KEYS.GET_CURRENT_USER],
   queryFn: getCurrentUser,
 });
 
+/**
+ * Custom hook for getting all users.
+ *
+ * @returns An object with the query function for getting all users.
+ */
 export const useGetAllUsers = () => useQuery({
   queryKey: [QUERY_KEYS.GET_USERS],
   queryFn: getAllUsers,
 });
 
+/**
+ * Custom hook for getting a post by its ID.
+ *
+ * @param postId - The ID of the post.
+ * @returns An object with the query function for getting a post by ID.
+ */
 export const useGetPostById = (postId:string) => useQuery({
   queryKey: [QUERY_KEYS.GET_POST_BY_ID, postId],
   queryFn: () => getPostById(postId),
   enabled: !!postId,
 });
 
+/**
+ * Custom hook for getting posts by a specific user.
+ *
+ * @param user - The user document.
+ * @returns An object with the query function for getting posts by user.
+ */
 export const useGetUserPosts = (user:Models.Document | undefined) => useQuery({
   queryKey: [QUERY_KEYS.GET_USER_POSTS, user],
   queryFn: () => getUserPosts(user),
   enabled: !!user,
 });
 
+/**
+ * Custom hook for getting a user by their ID.
+ *
+ * @param userId - The ID of the user.
+ * @returns An object with the query function for getting a user by ID.
+ */
 export const useGetUserById = (userId:string) => useQuery({
   queryKey: [QUERY_KEYS.GET_USER_BY_ID, userId],
   queryFn: () => getUserById(userId),
   enabled: !!userId,
 });
 
+/**
+ * Custom hook for updating a post.
+ *
+ * @returns An object with the mutation function for updating a post.
+ */
 export const useUpdatePost = () => {
   const queryClient = useQueryClient();
 
@@ -155,6 +227,11 @@ export const useUpdatePost = () => {
   });
 };
 
+/**
+ * Custom hook for deleting a post.
+ *
+ * @returns An object with the mutation function for deleting a post.
+ */
 export const useDeletePost = () => {
   const queryClient = useQueryClient();
 
@@ -169,6 +246,11 @@ export const useDeletePost = () => {
   });
 };
 
+/**
+ * Custom hook for getting infinite posts.
+ *
+ * @returns An object with the infinite query function for getting posts.
+ */
 export const useGetPosts = () => useInfiniteQuery({
   queryKey: [QUERY_KEYS.GET_INFINITE_POSTS],
   queryFn: getInfinitePosts,
@@ -185,11 +267,22 @@ export const useGetPosts = () => useInfiniteQuery({
   },
 });
 
+/**
+ * Custom hook for getting the current user's saved posts.
+ *
+ * @returns An object with the query function for getting saved posts.
+ */
 export const useGetCurrentUserSavedPosts = () => useQuery({
   queryKey: [QUERY_KEYS.GET_CURRENT_USER_SAVED_POSTS],
   queryFn: getCurrentUserSavedPosts,
 });
 
+/**
+ * Custom hook for searching posts based on a search term.
+ *
+ * @param searchTerm - The term to search for in posts.
+ * @returns An object with the query function for searching posts.
+ */
 export const useSearchPosts = (searchTerm:string) => useQuery({
   queryKey: [QUERY_KEYS.SEARCH_POSTS, searchTerm],
   queryFn: () => searchPosts(searchTerm),

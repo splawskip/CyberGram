@@ -4,6 +4,7 @@ import Topbar from '@/components/shared/Topbar';
 import Bottombar from '@/components/shared/Bottombar';
 
 function RootLayout() {
+  // Build component.
   return (
     <div className="w-full md:flex">
       <Topbar />

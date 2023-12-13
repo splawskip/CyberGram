@@ -4,6 +4,7 @@ import { useGetRecentPosts } from '@/lib/react-query/queriesAndMutations';
 import PostCard from '@/components/shared/PostCard';
 
 function Home() {
+  // Get recent posts.
   const { data: posts, isPending: isPostLoading } = useGetRecentPosts();
   // Build component.
   return (

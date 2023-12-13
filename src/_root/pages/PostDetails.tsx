@@ -12,12 +12,11 @@ function PostDetails() {
   const { user } = useUserContext();
   const { data: post, isPending } = useGetPostById(id ?? '');
   const { mutate: deletePost } = useDeletePost();
-
   const handleDeletePost = () => {
     deletePost({ postId: id ?? '', imageId: post?.imageId });
     navigate(-1);
   };
-
+  // Build component.
   return (
     <div className="post_details-container">
       {isPending ? <Loader /> : (

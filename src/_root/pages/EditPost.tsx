@@ -4,10 +4,13 @@ import PostForm from '@/components/forms/PostForm';
 import { useGetPostById } from '@/lib/react-query/queriesAndMutations';
 
 function EditPost() {
+  // Get id.
   const { id } = useParams();
+  // Get post by id.
   const { data: post, isPending } = useGetPostById(id ?? '');
-
+  // Show loader if not yet loaded.
   if (isPending) return <Loader />;
+  // Build component.
   return (
     <div className="flex flex-1">
       <div className="common-container">

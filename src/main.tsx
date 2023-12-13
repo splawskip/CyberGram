@@ -4,6 +4,7 @@ import App from './App';
 import AuthProvider from './context/AuthContext';
 import QueryProvider from './lib/react-query/QueryProvider';
 
+// DOM Tree goes brrrr.
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
     <QueryProvider>

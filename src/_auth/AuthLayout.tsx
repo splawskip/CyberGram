@@ -2,7 +2,7 @@ import { Outlet, Navigate } from 'react-router-dom';
 
 function AuthLayout() {
   const isAuthenticated = false;
-
+  // Build component.
   return (
     <>
       {isAuthenticated ? <Navigate to="/" /> : (
@@ -11,7 +11,7 @@ function AuthLayout() {
             <Outlet />
           </section>
 
-          <img loading="lazy" src="/assets/images/side-img.svg" alt="logo" className="hidden xl:block h-screen w-1/2 object-cover bg-no-repeat" />
+          <img loading="lazy" src="/assets/images/side-img.jpg" alt="logo" className="hidden xl:block h-screen w-1/2 object-cover bg-no-repeat" />
         </>
       )}
     </>

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { IUser, IContextType } from '@/types';
 import { getCurrentUser } from '@/lib/appwrite/api';
 
+// Scaffold initial user object.
 export const INITIAL_USER = {
   id: '',
   name: '',
@@ -12,6 +13,7 @@ export const INITIAL_USER = {
   bio: '',
 };
 
+// Scaffold initial value for state.
 const INITIAL_STATE = {
   user: INITIAL_USER,
   isLoading: false,
@@ -21,6 +23,7 @@ const INITIAL_STATE = {
   checkAuthUser: async () => false as boolean,
 };
 
+// Create context.
 const AuthContext = React.createContext<IContextType>(INITIAL_STATE);
 
 function AuthProvider({ children } : { children: React.ReactNode }) {
