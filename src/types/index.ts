@@ -1,3 +1,4 @@
+import React from 'react';
 import { Models } from 'appwrite';
 
 export type INavLink = {
@@ -70,4 +71,35 @@ export type PostFormProps = {
 
 export type PostCardProps = {
   post: Models.Document;
+};
+
+export type UserCardProps = {
+  user: Models.Document
+};
+
+export type UsersGridProps = {
+  users: Models.DocumentList<Models.Document>,
+};
+
+export type SearchResultsProps = {
+  isSearching: boolean,
+  searchedPosts: Models.DocumentList<Models.Document> | undefined,
+};
+
+export type PostStatsProps = {
+  post: Models.Document,
+  userId: string,
+};
+
+export type GridPostListProps = {
+  posts: Models.Document[],
+  showUser?: boolean,
+  showStats?: boolean,
+};
+
+export type CyberButtonProps = {
+  children: React.ReactNode,
+  disabled?: boolean,
+  loading?: boolean,
+  variant?: 'warn' | 'cancel' | 'accept',
 };
