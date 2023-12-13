@@ -6,8 +6,8 @@ import {
   AllUsers, CreatePost, EditPost, Explore, Home, PostDetails, Profile, Saved, UpdateProfile,
 } from './_root/pages';
 import { Toaster } from '@/components/ui/toaster';
-import SignInForm from './_auth/forms/SignInForm';
-import SignUpForm from './_auth/forms/SignUpForm';
+import SignIn from './_auth/forms/SignIn';
+import SignUp from './_auth/forms/SignUp';
 
 function App() {
   return (
@@ -15,8 +15,8 @@ function App() {
       <Routes>
         {/* Public routes */}
         <Route element={<AuthLayout />}>
-          <Route path="/sign-in" element={<SignInForm />} />
-          <Route path="/sign-up" element={<SignUpForm />} />
+          <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/sign-up" element={<SignUp />} />
         </Route>
         {/* Private routes */}
         <Route element={<RootLayout />}>
