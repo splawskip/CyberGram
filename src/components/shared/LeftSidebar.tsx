@@ -48,9 +48,9 @@ function LeftSidebar() {
             const isCurrent = pathname === link.route;
             // Render nav item.
             return (
-              <li className={`group ${isCurrent && 'bg-primary-500'} leftsidebar-link`} key={link.label}>
+              <li className={`group ${isCurrent && 'bg-primary-500 text-dark-1'} leftsidebar-link`} key={link.label}>
                 <NavLink to={link.route} className="flex gap-4 item-center p-4">
-                  <img loading="lazy" src={link.imgURL} alt={link.label} className={`group-hover:invert-white ${isCurrent && 'invert-white'}`} />
+                  <img loading="lazy" src={link.imgURL} alt={link.label} className={`group-hover:text-dark-1 ${isCurrent && 'text-dark-1'}`} />
                   {link.label}
                 </NavLink>
               </li>

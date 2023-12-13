@@ -15,7 +15,7 @@ function PostCard({ post }:PostCardProps) {
     deletePost({ postId: post.id ?? '', imageId: post.imageId });
     navigate(-1);
   };
-
+  // Build component.
   return (
     <div className="post-card">
       <div className="flex-between flex-wrap">

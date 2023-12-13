@@ -1,9 +1,5 @@
-import { Models } from 'appwrite';
+import { UsersGridProps } from '@/types';
 import UserCard from './UserCard';
-
-type UsersGridProps = {
-  users: Models.DocumentList<Models.Document>,
-};
 
 function UsersGrid({ users } : UsersGridProps) {
   // No one uses our app :(.

@@ -4,8 +4,7 @@ import * as z from 'zod';
 
 import { Models } from 'appwrite';
 import { useNavigate } from 'react-router-dom';
-import { Loader } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+
 import {
   Form,
   FormControl,
@@ -22,6 +21,7 @@ import { useUserContext } from '@/context/AuthContext';
 import { useToast } from '../ui/use-toast';
 import { useCreatePost, useUpdatePost } from '@/lib/react-query/queriesAndMutations';
 import { PostFormProps } from '@/types';
+import CyberButton from '../buttons/CyberButton';
 
 function PostForm({ post, action }: PostFormProps) {
   const { mutateAsync: createPost, isPending: isCreating } = useCreatePost();
@@ -123,13 +123,14 @@ function PostForm({ post, action }: PostFormProps) {
           )}
         />
         <div className="flex gap-4 items-center justify-end">
-          <Button type="button" className="shad-button_dark_4" disabled={isCreating || isUpdating}>Cancel</Button>
-          <Button type="submit" className="shad-button_primary whitespace-nowrap" disabled={isCreating || isUpdating}>
-            {(isCreating || isUpdating) && <Loader />}
+          <CyberButton variant="cancel" disabled={isCreating || isUpdating} loading={isCreating || isUpdating}>
+            Cancel
+          </CyberButton>
+          <CyberButton variant="accept" disabled={isCreating || isUpdating} loading={isCreating || isUpdating}>
             {action}
             {' '}
             Post
-          </Button>
+          </CyberButton>
         </div>
       </form>
     </Form>

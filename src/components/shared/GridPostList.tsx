@@ -1,13 +1,7 @@
 import { Link } from 'react-router-dom';
-import { Models } from 'appwrite';
 import { useUserContext } from '@/context/AuthContext';
 import PostStats from './PostStats';
-
-type GridPostListProps = {
-  posts: Models.Document[],
-  showUser?: boolean,
-  showStats?: boolean,
-};
+import { GridPostListProps } from '@/types';
 
 const defaultProps: Partial<GridPostListProps> = {
   showUser: true,

@@ -5,11 +5,7 @@ import {
 } from '@/lib/react-query/queriesAndMutations';
 import { checkIsLiked } from '@/lib/utils';
 import Loader from './Loader';
-
-type PostStatsProps = {
-  post: Models.Document,
-  userId: string,
-};
+import { PostStatsProps } from '@/types';
 
 function PostStats({ post, userId } : PostStatsProps) {
   const likesList = post.likes.map((user:Models.Document) => user.$id);

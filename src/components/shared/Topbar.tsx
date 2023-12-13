@@ -13,6 +13,7 @@ function Topbar() {
       navigate(0);
     }
   }, [navigate, isSuccess]);
+  // Build component.
   return (
     <section className="topbar">
       <div className="flex-between py-4 px-5">

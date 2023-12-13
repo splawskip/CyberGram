@@ -1,11 +1,6 @@
-import { Models } from 'appwrite';
 import Loader from './Loader';
 import GridPostList from './GridPostList';
-
-type SearchResultsProps = {
-  isSearching: boolean,
-  searchedPosts: Models.DocumentList<Models.Document> | undefined,
-};
+import { SearchResultsProps } from '@/types';
 
 function SearchResults({ isSearching, searchedPosts } : SearchResultsProps) {
   // Show the loader.

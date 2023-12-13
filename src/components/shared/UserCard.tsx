@@ -1,17 +1,14 @@
 import { Link } from 'react-router-dom';
-import { Models } from 'appwrite';
-import { Button } from '@/components/ui/button';
-
-type UserCardProps = {
-  user: Models.Document
-};
+import CyberButton from '../buttons/CyberButton';
+import { UserCardProps } from '@/types';
 
 function UserCard({ user } : UserCardProps) {
+  // Build component.
   return (
     <Link key={user.$id} to={`/profile/${user.$id}`}>
       <li className="user-card">
         <img loading="lazy" src={user.imageUrl ?? '/assets/icons/profile-placeholder.svg'} alt="User avatar" className="h-14 w-14 rounded-full" />
-        <div className="flex flex-col items-center gap-2 text-center">
+        <div className="flex flex-col items-center gap-3 text-center">
           <p className="body-bold">
             {user.name}
           </p>
@@ -19,7 +16,7 @@ function UserCard({ user } : UserCardProps) {
             @
             {user.username}
           </p>
-          <Button className="shad-button_primary mt-2">Follow</Button>
+          <CyberButton variant="warn">Follow</CyberButton>
         </div>
       </li>
     </Link>
