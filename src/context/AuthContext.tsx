@@ -56,7 +56,7 @@ function AuthProvider({ children } : { children: React.ReactNode }) {
   };
   React.useEffect(() => {
     // If there is no current session, redirect to sign in page.
-    if (localStorage.getItem('sessionId') === '[]' || localStorage.getItem('sessionId') === null) {
+    if (localStorage.getItem('cookieFallback') === '[]' || localStorage.getItem('cookieFallback') === null) {
       navigate('/sign-in');
     }
     // Check if we should authenitcate a user.
