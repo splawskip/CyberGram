@@ -26,43 +26,52 @@ const INITIAL_STATE = {
 // Create context.
 const AuthContext = React.createContext<IContextType>(INITIAL_STATE);
 
-function AuthProvider({ children } : { children: React.ReactNode }) {
-  const [user, setUser] = React.useState<IUser>(INITIAL_USER);
-  const [isLoading, setIsLoading] = React.useState(false);
-  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+export default function AuthProvider({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
+  const [user, setUser] = React.useState<IUser>(INITIAL_USER);
+  const [isAuthenticated, setIsAuthenticated] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
+
   const checkAuthUser = async () => {
+    setIsLoading(true);
     try {
       const currentAccount = await getCurrentUser();
       if (currentAccount) {
         setUser({
           id: currentAccount.$id,
-          username: currentAccount.username,
           name: currentAccount.name,
+          username: currentAccount.username,
           email: currentAccount.email,
           imageUrl: currentAccount.imageUrl,
           bio: currentAccount.bio,
         });
         setIsAuthenticated(true);
+
         return true;
       }
+
       return false;
     } catch (error) {
-      console.log(error);
+      console.error(error);
       return false;
     } finally {
       setIsLoading(false);
     }
   };
+
   React.useEffect(() => {
-    // If there is no current session, redirect to sign in page.
-    if (localStorage.getItem('cookieFallback') === '[]' || localStorage.getItem('cookieFallback') === null) {
+    const cookieFallback = localStorage.getItem('cookieFallback');
+    if (
+      cookieFallback === '[]'
+      || cookieFallback === null
+      || cookieFallback === undefined
+    ) {
       navigate('/sign-in');
     }
-    // Check if we should authenitcate a user.
+
     checkAuthUser();
-  }, [navigate]);
-  // Create value for the context.
+  }, []); // eslint-disable-line
+
   const value = React.useMemo(() => ({
     user,
     setUser,
@@ -71,14 +80,8 @@ function AuthProvider({ children } : { children: React.ReactNode }) {
     setIsAuthenticated,
     checkAuthUser,
   }), [user, isAuthenticated, isLoading]);
-  // Render AuthContext Provider.
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
-}
 
-export default AuthProvider;
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
 
 export const useUserContext = () => React.useContext(AuthContext);
