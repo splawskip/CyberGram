@@ -27,3 +27,11 @@ export const PostUploadValidation = z.object({
   location: z.string().min(2).max(100),
   tags: z.string(),
 });
+
+/**
+ * Validation schema for P.
+ */
+export const UserUpdateValidation = z.object({
+  file: z.custom<File[]>(),
+  bio: z.string().min(0).max(200),
+});
