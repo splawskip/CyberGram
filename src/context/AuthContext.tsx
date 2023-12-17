@@ -10,6 +10,7 @@ export const INITIAL_USER = {
   username: '',
   email: '',
   imageUrl: '',
+  imageId: '',
   bio: '',
 };
 
@@ -42,6 +43,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
           name: currentAccount.name,
           username: currentAccount.username,
           email: currentAccount.email,
+          imageId: currentAccount.imageId,
           imageUrl: currentAccount.imageUrl,
           bio: currentAccount.bio,
         });
@@ -70,7 +72,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
     }
 
     checkAuthUser();
-  }, []); // eslint-disable-line
+  });
 
   const value = React.useMemo(() => ({
     user,
