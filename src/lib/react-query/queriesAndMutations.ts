@@ -22,8 +22,11 @@ import {
   getCurrentUserSavedPosts,
   getUserById,
   getUserPosts,
+  updateUser,
 } from '../appwrite/api';
-import { INewPost, INewUser, IUpdatePost } from '@/types';
+import {
+  INewPost, INewUser, IUpdatePost, IUpdateUser,
+} from '@/types';
 import { QUERY_KEYS } from './queryKeys';
 
 /**
@@ -222,6 +225,30 @@ export const useUpdatePost = () => {
     onSuccess: (data) => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.GET_POST_BY_ID, data?.$id],
+      });
+    },
+  });
+};
+
+/**
+ * Custom hook for updating a post.
+ *
+ * @returns An object with the mutation function for updating a post.
+ */
+export const useUpdateUser = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (user:IUpdateUser) => updateUser(user),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_USER_BY_ID, data?.$id],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_CURRENT_USER],
+      });
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.GET_USERS],
       });
     },
   });
