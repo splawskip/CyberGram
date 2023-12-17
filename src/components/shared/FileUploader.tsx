@@ -36,7 +36,7 @@ function FileUploader({ fieldChange, mediaUrl } : FileUploaderProps) {
          <div className="file_uploader-box">
            <img loading="lazy" src="/assets/icons/file-upload.svg" width={96} height={77} alt="File Upload" />
            <h3 className="base-medium text-light-2 mb-2 mt-6">Drag photo here</h3>
-           <p className="text-light-4 small-regular mb-6">SVG, PNG, JPG</p>
+           <p className="text-light-4 small-regular mb-6">SVG, PNG, JPG, JPEG, WEBP</p>
            <Button className="shad-button_dark_4">Select from file explorer</Button>
          </div>
        )
