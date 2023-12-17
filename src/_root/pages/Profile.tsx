@@ -1,7 +1,8 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import { useGetUserById, useGetUserPosts } from '@/lib/react-query/queriesAndMutations';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useGetCurrentUser, useGetUserById, useGetUserPosts } from '@/lib/react-query/queriesAndMutations';
 import Loader from '@/components/shared/Loader';
 import GridPostList from '@/components/shared/GridPostList';
+import CyberButton from '@/components/buttons/CyberButton';
 
 function Profile() {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ function Profile() {
   }
   // Get user posts.
   const { data: posts, isPending: arePostsLoading } = useGetUserPosts(user);
+  const { data: currentUser } = useGetCurrentUser();
   // Show loader on loading.
   if (isUserLoading) {
     return <Loader />;
@@ -26,8 +28,8 @@ function Profile() {
     <div className="profile-container">
       <div className="profile-inner_container">
         <div className="flex flex-col gap-10">
-          <section className="flex items-start justify-between">
-            <div className="flex justify-start items-start gap-10">
+          <section className="flex items-start justify-between gap-4">
+            <div className="flex justify-start items-start gap-4">
               <img loading="lazy" src={user?.imageUrl ?? '/assets/icons/profile-placeholder.svg'} alt="User avatar" className="h-40 w-40 rounded-full" />
               <div className="flex flex-col items-start gap-2">
                 <h2 className="h3-bold md:h2-bold w-full">
@@ -47,6 +49,14 @@ function Profile() {
                     Posts
                   </li>
                 </ol>
+                {
+                  user?.$id === currentUser?.$id
+                && (
+                  <Link to={`/update-profile/${user?.$id}`}>
+                    <CyberButton>Edit Profile</CyberButton>
+                  </Link>
+                )
+                }
               </div>
             </div>
           </section>
