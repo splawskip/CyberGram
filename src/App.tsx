@@ -19,6 +19,7 @@ import SignIn from './_auth/forms/SignIn';
 import SignUp from './_auth/forms/SignUp';
 
 function App() {
+  // Build component.
   return (
     <main className="flex h-screen">
       <Routes>

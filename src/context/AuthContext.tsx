@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { IUser, IContextType } from '@/types';
 import { getCurrentUser } from '@/lib/appwrite/api';
 
@@ -29,10 +29,10 @@ const AuthContext = React.createContext<IContextType>(INITIAL_STATE);
 
 export default function AuthProvider({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const [user, setUser] = React.useState<IUser>(INITIAL_USER);
   const [isAuthenticated, setIsAuthenticated] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
-
   const checkAuthUser = async () => {
     setIsLoading(true);
     try {
@@ -48,32 +48,27 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
           bio: currentAccount.bio,
         });
         setIsAuthenticated(true);
-
         return true;
       }
-
       return false;
     } catch (error) {
-      console.error(error);
       return false;
     } finally {
       setIsLoading(false);
     }
   };
-
+  // Check auth user effect.
   React.useEffect(() => {
-    const cookieFallback = localStorage.getItem('cookieFallback');
-    if (
-      cookieFallback === '[]'
-      || cookieFallback === null
-      || cookieFallback === undefined
-    ) {
+    // Get cookie fallback.
+    const userSession = localStorage.getItem('cookieFallback') ?? false;
+    // Check if we should redirect to sign page.
+    if ((!userSession || userSession === '[]') && pathname !== '/sign-up') {
       navigate('/sign-in');
     }
-
+    // Check auth user.
     checkAuthUser();
-  });
-
+  }, []); // eslint-disable-line
+  // Build context object.
   const value = React.useMemo(() => ({
     user,
     setUser,
@@ -82,7 +77,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
     setIsAuthenticated,
     checkAuthUser,
   }), [user, isAuthenticated, isLoading]);
-
+  // Build provider component.
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
