@@ -18,6 +18,7 @@ function LeftSidebar() {
       navigate(0);
     }
   }, [navigate, isSuccess]);
+  // Build component.
   return (
     <nav className="leftsidebar">
       <div className="flex flex-col gap-11">
