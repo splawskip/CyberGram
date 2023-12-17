@@ -3,7 +3,16 @@ import { Routes, Route } from 'react-router-dom';
 import AuthLayout from './_auth/AuthLayout';
 import RootLayout from './_root/RootLayout';
 import {
-  AllUsers, CreatePost, EditPost, Explore, Home, PostDetails, Profile, Saved, UpdateProfile,
+  AllUsers,
+  CreatePost,
+  EditPost,
+  Explore,
+  Home,
+  NotFound,
+  PostDetails,
+  Profile,
+  Saved,
+  UpdateProfile,
 } from './_root/pages';
 import { Toaster } from '@/components/ui/toaster';
 import SignIn from './_auth/forms/SignIn';
@@ -13,6 +22,7 @@ function App() {
   return (
     <main className="flex h-screen">
       <Routes>
+        <Route path="*" element={<NotFound />} />
         {/* Public routes */}
         <Route element={<AuthLayout />}>
           <Route path="/sign-in" element={<SignIn />} />
