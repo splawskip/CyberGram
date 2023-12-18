@@ -199,7 +199,7 @@ export async function uploadFile(file:File) {
 export function getFilePreview(fileId: string) {
   try {
     // Get file preview url.
-    const fileUrl = storage.getFilePreview(appwriteConfig.storageId, fileId, 2000, 2000, 'center', 100);
+    const fileUrl = storage.getFilePreview(appwriteConfig.storageId, fileId, 500, 500, 'top', 100);
     // Bail if failed.
     if (!fileUrl) throw new Error('Unable to get file preview url.');
     // Return file url.
