@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
-import { Loader } from 'lucide-react';
 import PostForm from '@/components/forms/PostForm';
 import { useGetPostById } from '@/lib/react-query/queriesAndMutations';
+import CyberLoader from '@/components/shared/CyberLoader';
 
 function EditPost() {
   // Get id.
@@ -9,7 +9,13 @@ function EditPost() {
   // Get post by id.
   const { data: post, isPending } = useGetPostById(id ?? '');
   // Show loader if not yet loaded.
-  if (isPending) return <Loader />;
+  if (isPending) {
+    return (
+      <div className="grid place-items-center w-full h-full">
+        <CyberLoader />
+      </div>
+    );
+  }
   // Build component.
   return (
     <div className="flex flex-1">

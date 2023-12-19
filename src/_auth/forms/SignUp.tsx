@@ -13,10 +13,10 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { SignUpValidation } from '@/lib/validation';
-import Loader from '@/components/shared/Loader';
 import { useToast } from '@/components/ui/use-toast';
 import { useCreateUserAccount, useSignInAccount } from '@/lib/react-query/queriesAndMutations';
 import { useUserContext } from '@/context/AuthContext';
+import CyberLoader from '@/components/shared/CyberLoader';
 
 function SignUp() {
   const { toast } = useToast();
@@ -136,7 +136,7 @@ function SignUp() {
           <Button type="submit" className="shad-button_primary">
             {isCreatingAccount ? (
               <div className="flex-center gap-2">
-                <Loader />
+                <CyberLoader />
                 Loading...
               </div>
             ) : 'Sign up'}

@@ -1,10 +1,16 @@
-import Loader from './Loader';
 import GridPostList from './GridPostList';
 import { SearchResultsProps } from '@/types';
+import CyberLoader from './CyberLoader';
 
 function SearchResults({ isSearching, searchedPosts } : SearchResultsProps) {
   // Show the loader.
-  if (isSearching) return <Loader />;
+  if (isSearching) {
+    return (
+      <div className="w-full h-full grid place-items-center">
+        <CyberLoader />
+      </div>
+    );
+  }
   // Show no results note.
   if (searchedPosts?.total && searchedPosts?.total <= 0) {
     return (

@@ -279,6 +279,7 @@
   }
 }
 
+/* CyberButton */
 .cyber-btn {
   --primary: hsl(var(--primary-hue), 85%, calc(var(--primary-lightness, 50) * 1%));
   --shadow-primary: hsl(var(--shadow-primary-hue), 90%, 50%);
@@ -458,5 +459,65 @@
   }
   31%, 61%, 100% {
     clip-path: var(--clip-four);
+  }
+}
+
+/* CyberLoader */
+.spinny-loader {
+  display:inline-block;
+  position:relative;
+  width:35px;
+  height:35px;
+  margin:0 10px;
+}
+
+.spinny-loader > div {
+  position:absolute;
+  top:50%;
+  left:50%;
+  display:block;
+  width:20px;
+  height:20px;
+  transform: translate3d(-50%, -50%, 0);
+  border-radius:200px;
+  background-color:#00F0FF;
+}
+
+.spinny-loader::before, .spinny-loader::after {
+  content:"";
+  position:absolute;
+  top:50%;
+  left:50%;
+  display:block;
+
+  border-radius:200px;
+  border-style:solid;
+  border-width:5px;
+  border-color:#00F0FF transparent #00F0FF transparent;
+
+  animation-name:spinny;
+  animation-duration: 0.6s;
+  animation-iteration-count:infinite;
+  animation-timing-function: ease-in-out;
+}
+
+.spinny-loader::after {
+  width:35px;
+  height:35px;
+  animation-direction: alternate-reverse;
+}
+
+.spinny-loader::before {
+  width:33px;
+  height:33px;
+}
+
+@keyframes spinny {
+  0% {
+    transform-origin:50%;
+    transform:translate3d(-50%, -50%, 0) rotateZ(0deg);
+  }
+  100% {
+    transform:translate3d(-50%, -50%, 0) rotateZ(360deg);
   }
 }

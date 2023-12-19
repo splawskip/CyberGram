@@ -1,5 +1,5 @@
+import CyberLoader from '@/components/shared/CyberLoader';
 import GridPostList from '@/components/shared/GridPostList';
-import Loader from '@/components/shared/Loader';
 import { useGetCurrentUserSavedPosts } from '@/lib/react-query/queriesAndMutations';
 
 function Saved() {
@@ -12,7 +12,11 @@ function Saved() {
         <h2 className="h3-bold md:h2-bold w-full">Posts that you saved</h2>
       </div>
       <div className="flex flex-wrap gap-9 w-full max-w-5xl">
-        {isPending && <Loader />}
+        {isPending && (
+          <div className="grid place-items-center w-full h-full">
+            <CyberLoader />
+          </div>
+        )}
 
         {(!isPending && !savedPosts) && (
           <p className="text-light-4 mt-10 text-center w-full">No posts</p>

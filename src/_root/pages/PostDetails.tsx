@@ -1,10 +1,10 @@
-import { Loader } from 'lucide-react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useGetPostById, useDeletePost } from '@/lib/react-query/queriesAndMutations';
 import { getRelativeTime } from '@/lib/utils';
 import { useUserContext } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
 import PostStats from '@/components/shared/PostStats';
+import CyberLoader from '@/components/shared/CyberLoader';
 
 function PostDetails() {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ function PostDetails() {
   // Build component.
   return (
     <div className="post_details-container">
-      {isPending ? <Loader /> : (
+      {isPending ? <CyberLoader /> : (
         <div className="post_details-card">
           <img loading="lazy" src={post?.imageUrl} alt="Post" className="post_details-img" />
           <div className="post_details-info">

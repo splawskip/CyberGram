@@ -1,8 +1,8 @@
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useGetCurrentUser, useGetUserById, useGetUserPosts } from '@/lib/react-query/queriesAndMutations';
-import Loader from '@/components/shared/Loader';
 import GridPostList from '@/components/shared/GridPostList';
 import CyberButton from '@/components/buttons/CyberButton';
+import CyberLoader from '@/components/shared/CyberLoader';
 
 function Profile() {
   const navigate = useNavigate();
@@ -21,7 +21,11 @@ function Profile() {
   const { data: currentUser } = useGetCurrentUser();
   // Show loader on loading.
   if (isUserLoading) {
-    return <Loader />;
+    return (
+      <div className="grid place-items-center w-full h-full">
+        <CyberLoader />
+      </div>
+    );
   }
   // Build component.
   return (

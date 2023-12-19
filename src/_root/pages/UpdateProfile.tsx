@@ -2,6 +2,7 @@ import ProfileForm from '@/components/forms/ProfileForm';
 import { useUserContext } from '@/context/AuthContext';
 
 function UpdateProfile() {
+  // Get user data.
   const { user } = useUserContext();
   // Build component.
   return (

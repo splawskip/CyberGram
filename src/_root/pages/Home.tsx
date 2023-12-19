@@ -1,7 +1,7 @@
 import { Models } from 'appwrite';
-import Loader from '@/components/shared/Loader';
 import { useGetRecentPosts } from '@/lib/react-query/queriesAndMutations';
 import PostCard from '@/components/shared/PostCard';
+import CyberLoader from '@/components/shared/CyberLoader';
 
 function Home() {
   // Get recent posts.
@@ -12,7 +12,7 @@ function Home() {
       <div className="home-container">
         <div className="home-posts">
           <h2 className="h3-bold md:h2 text-left w-full">Home Feed</h2>
-          {isPostLoading && !posts ? (<Loader />) : (
+          {isPostLoading && !posts ? (<CyberLoader />) : (
             <ul className="flex flex-col flex-1 gap-9 w-full">
               {posts?.documents.map((post:Models.Document) => (
                 <PostCard key={post.$id} post={post} />

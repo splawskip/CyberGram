@@ -77,7 +77,7 @@ function PostForm({ post, action }: PostFormProps) {
             <FormItem>
               <FormLabel className="shad-form_label">Caption</FormLabel>
               <FormControl>
-                <Textarea placeholder="shadcn" className="shad-textarea custom-scrollbar" {...field} />
+                <Textarea placeholder="N0futur3" className="shad-textarea custom-scrollbar" {...field} />
               </FormControl>
               <FormMessage className="shad-form_message" />
             </FormItem>
@@ -103,7 +103,7 @@ function PostForm({ post, action }: PostFormProps) {
             <FormItem>
               <FormLabel className="shad-form_label">Add Location</FormLabel>
               <FormControl>
-                <Input type="text" className="shad-input" {...field} />
+                <Input placeholder="Night City" type="text" className="shad-input" {...field} />
               </FormControl>
               <FormMessage className="shad-form_message" />
             </FormItem>
@@ -123,7 +123,7 @@ function PostForm({ post, action }: PostFormProps) {
           )}
         />
         <div className="flex gap-4 items-center justify-end">
-          <CyberButton variant="cancel" disabled={isCreating || isUpdating} loading={isCreating || isUpdating}>
+          <CyberButton variant="cancel" disabled={isCreating || isUpdating} loading>
             Cancel
           </CyberButton>
           <CyberButton variant="accept" disabled={isCreating || isUpdating} loading={isCreating || isUpdating}>

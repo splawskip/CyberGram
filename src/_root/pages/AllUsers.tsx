@@ -1,6 +1,6 @@
-import Loader from '@/components/shared/Loader';
 import { useGetAllUsers } from '@/lib/react-query/queriesAndMutations';
 import UsersGrid from '@/components/shared/UsersGrid';
+import CyberLoader from '@/components/shared/CyberLoader';
 
 function AllUsers() {
   // Get users.
@@ -14,7 +14,7 @@ function AllUsers() {
           {
             isPending && (
               <div className="flex-center w-full h-full">
-                <Loader />
+                <CyberLoader />
               </div>
             )
           }

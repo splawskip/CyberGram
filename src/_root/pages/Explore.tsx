@@ -5,7 +5,7 @@ import SearchResults from '@/components/shared/SearchResults';
 import GridPostList from '@/components/shared/GridPostList';
 import { useGetPosts, useSearchPosts } from '@/lib/react-query/queriesAndMutations';
 import useDebounce from '@/hooks/useDebounce';
-import Loader from '@/components/shared/Loader';
+import CyberLoader from '@/components/shared/CyberLoader';
 
 function Explore() {
   // Get intersection observer tools.
@@ -28,7 +28,7 @@ function Explore() {
   if (!posts) {
     return (
       <div className="flex-center w-full h-full">
-        <Loader />
+        <CyberLoader />
       </div>
     );
   }
@@ -69,7 +69,7 @@ function Explore() {
 
       {hasNextPage && !searchValue && (
         <div ref={ref} className="mt-10">
-          <Loader />
+          <CyberLoader />
         </div>
       )}
     </div>

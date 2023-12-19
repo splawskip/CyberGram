@@ -4,8 +4,8 @@ import {
   useDeleteSavePost, useGetCurrentUser, useLikePost, useSavePost,
 } from '@/lib/react-query/queriesAndMutations';
 import { checkIsLiked } from '@/lib/utils';
-import Loader from './Loader';
 import { PostStatsProps } from '@/types';
+import Loader from './Loader';
 
 function PostStats({ post, userId } : PostStatsProps) {
   const likesList = post.likes.map((user:Models.Document) => user.$id);
