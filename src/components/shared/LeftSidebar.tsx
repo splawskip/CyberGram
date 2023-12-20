@@ -20,7 +20,7 @@ function LeftSidebar() {
   }, [navigate, isSuccess]);
   // Build component.
   return (
-    <nav className="leftsidebar">
+    <nav className="hidden md:flex px-6 py-10 flex-col justify-between min-w-[270px] bg-dark-2">
       <div className="flex flex-col gap-11">
         <Link to="/" className="flex gap-3 items-center">
           <img
@@ -49,7 +49,7 @@ function LeftSidebar() {
             const isCurrent = pathname === link.route;
             // Render nav item.
             return (
-              <li className={`group ${isCurrent && 'bg-primary-500 text-dark-1'} leftsidebar-link`} key={link.label}>
+              <li className={`group ${isCurrent && 'bg-primary-500 text-dark-1'} rounded-lg base-medium hover:bg-primary-500 hover:text-dark-1 transition`} key={link.label}>
                 <NavLink to={link.route} className="flex gap-4 item-center p-4">
                   <img loading="lazy" src={link.imgURL} alt={link.label} className={`group-hover:text-dark-1 ${isCurrent && 'text-dark-1'}`} />
                   {link.label}
@@ -59,7 +59,7 @@ function LeftSidebar() {
           })}
         </ul>
       </div>
-      <Button variant="ghost" className="shad-button_ghost" onClick={() => signOut()}>
+      <Button variant="ghost" className="shad-button--transparent" onClick={() => signOut()}>
         <img loading="lazy" src="/assets/icons/logout.svg" alt="logout" />
         <p className="small-medium lg:base-medium">Logout</p>
       </Button>

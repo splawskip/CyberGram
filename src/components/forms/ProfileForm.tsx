@@ -64,11 +64,11 @@ function ProfileForm({ user }: ProfileFormProps) {
           name="file"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="shad-form_label">Avatar</FormLabel>
+              <FormLabel className="shad-form-label">Avatar</FormLabel>
               <FormControl>
                 <FileUploader fieldChange={field.onChange} mediaUrl={user?.imageUrl ?? ''} />
               </FormControl>
-              <FormMessage className="shad-form_message" />
+              <FormMessage className="shad-form-message" />
             </FormItem>
           )}
         />
@@ -77,11 +77,11 @@ function ProfileForm({ user }: ProfileFormProps) {
           name="bio"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="shad-form_label">Bio</FormLabel>
+              <FormLabel className="shad-form-label">Bio</FormLabel>
               <FormControl>
                 <Textarea placeholder="Your bio" className="shad-textarea custom-scrollbar" {...field} />
               </FormControl>
-              <FormMessage className="shad-form_message" />
+              <FormMessage className="shad-form-message" />
             </FormItem>
           )}
         />

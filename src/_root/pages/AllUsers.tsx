@@ -9,11 +9,11 @@ function AllUsers() {
   return (
     <div className="flex flex-1">
       <div className="common-container">
-        <div className="user-container">
+        <div className="max-w-5xl flex flex-col items-start w-full gap-6 md:gap-9">
           <h2 className="h3-bold md:h2-bold w-full">Find other creators</h2>
           {
             isPending && (
-              <div className="flex-center w-full h-full">
+              <div className="flex justify-center items-center w-full h-full">
                 <CyberLoader />
               </div>
             )

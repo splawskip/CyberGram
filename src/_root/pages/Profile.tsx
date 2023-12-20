@@ -29,8 +29,8 @@ function Profile() {
   }
   // Build component.
   return (
-    <div className="profile-container">
-      <div className="profile-inner_container">
+    <div className="flex flex-col items-center flex-1 gap-10 overflow-scroll py-10 px-5 md:p-14 custom-scrollbar">
+      <div className="flex items-center md:mb-8 xl:items-start gap-8 flex-col xl:flex-row relative max-w-5xl w-full">
         <div className="flex flex-col gap-10">
           <section className="flex items-start justify-between gap-4">
             <div className="flex justify-start items-start gap-4">

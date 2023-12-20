@@ -17,15 +17,15 @@ function PostCard({ post }:PostCardProps) {
   };
   // Build component.
   return (
-    <div className="post-card">
-      <div className="flex-between flex-wrap">
+    <div className="bg-dark-2 rounded-3xl border border-dark-4 p-5 lg:p-7 w-full max-w-screen-sm">
+      <div className="flex justify-between items-center flex-wrap">
         <div className="flex items-center gap-3">
           <Link to={`/profile/${post.creator.$id}`}>
             <img loading="lazy" src={post?.creator?.imageUrl ?? '/assets/icons/profile-placeholder.svg'} className="rounded-full w-12 lg:h-12" alt="Creator avatar" />
           </Link>
           <div className="flex flex-col">
             <p className="base-medium lg:body-bold text-light-1">{post.creator.name}</p>
-            <div className="flex-start gap-2 text-light-3">
+            <div className="flex justify-start items-center gap-2 text-light-3">
               <p className="subtle-semibold lg:small-regular">{getRelativeTime(post.$createdAt)}</p>
               -
               <p className="subtle-semibold lg:small-regular">{post.location}</p>
@@ -56,7 +56,7 @@ function PostCard({ post }:PostCardProps) {
               ))}
             </ul>
           </div>
-          <img loading="lazy" src={post.imageUrl ?? '/assets/icons/profile-placeholder.svg'} alt="Post content" className="post-card_img" />
+          <img loading="lazy" src={post.imageUrl ?? '/assets/icons/profile-placeholder.svg'} alt="Post content" className="h-64 xs:h-[400px] lg:h-[450px] w-full rounded-[24px] object-cover mb-5" />
         </Link>
       </div>
       <PostStats post={post} userId={user.id} />

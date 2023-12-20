@@ -75,11 +75,11 @@ function PostForm({ post, action }: PostFormProps) {
           name="caption"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="shad-form_label">Caption</FormLabel>
+              <FormLabel className="shad-form-label">Caption</FormLabel>
               <FormControl>
                 <Textarea placeholder="N0futur3" className="shad-textarea custom-scrollbar" {...field} />
               </FormControl>
-              <FormMessage className="shad-form_message" />
+              <FormMessage className="shad-form-message" />
             </FormItem>
           )}
         />
@@ -88,11 +88,11 @@ function PostForm({ post, action }: PostFormProps) {
           name="file"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="shad-form_label">Add Photos</FormLabel>
+              <FormLabel className="shad-form-label">Add Photos</FormLabel>
               <FormControl>
                 <FileUploader fieldChange={field.onChange} mediaUrl={post?.imageUrl} />
               </FormControl>
-              <FormMessage className="shad-form_message" />
+              <FormMessage className="shad-form-message" />
             </FormItem>
           )}
         />
@@ -101,11 +101,11 @@ function PostForm({ post, action }: PostFormProps) {
           name="location"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="shad-form_label">Add Location</FormLabel>
+              <FormLabel className="shad-form-label">Add Location</FormLabel>
               <FormControl>
                 <Input placeholder="Night City" type="text" className="shad-input" {...field} />
               </FormControl>
-              <FormMessage className="shad-form_message" />
+              <FormMessage className="shad-form-message" />
             </FormItem>
           )}
         />
@@ -114,16 +114,16 @@ function PostForm({ post, action }: PostFormProps) {
           name="tags"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="shad-form_label">Add Tags (separated by comma &quot;,&quot;)</FormLabel>
+              <FormLabel className="shad-form-label">Add Tags (separated by comma &quot;,&quot;)</FormLabel>
               <FormControl>
                 <Input type="text" className="shad-input" placeholder="Art, Learn" {...field} />
               </FormControl>
-              <FormMessage className="shad-form_message" />
+              <FormMessage className="shad-form-message" />
             </FormItem>
           )}
         />
         <div className="flex gap-4 items-center justify-end">
-          <CyberButton variant="cancel" disabled={isCreating || isUpdating} loading>
+          <CyberButton variant="cancel" disabled={isCreating || isUpdating} loading={isCreating || isUpdating}>
             Cancel
           </CyberButton>
           <CyberButton variant="accept" disabled={isCreating || isUpdating} loading={isCreating || isUpdating}>
