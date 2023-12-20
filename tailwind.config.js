@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 import tailwindAnimate from 'tailwindcss-animate';
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 export default {
   darkMode: ['class'],
@@ -18,6 +19,9 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ['Inter', ...defaultTheme.fontFamily.sans],
+      },
       colors: {
         'primary-500': '#FCEE0A',
         'secondary-500': '#00F0FF',
@@ -38,9 +42,6 @@ export default {
       width: {
         420: '420px',
         465: '465px',
-      },
-      fontFamily: {
-        inter: ['Inter', 'sans-serif'],
       },
       keyframes: {
         'accordion-down': {
