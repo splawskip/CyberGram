@@ -63,7 +63,7 @@ export async function createUserAccount(user:INewUser) {
     // Return new user.
     return newUser;
   } catch (error) {
-    throw new Error('Unable to create new user.');
+    throw new Error(error instanceof Error ? error.message : 'Unable to create new user.');
   }
 }
 
@@ -82,7 +82,7 @@ export async function signInAccount(user:{ email:string, password:string }) {
     // Return session.
     return session;
   } catch (error) {
-    throw new Error('Unable to create session.');
+    throw new Error(error instanceof Error ? error.message : 'Login Failed.');
   }
 }
 
