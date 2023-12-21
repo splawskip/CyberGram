@@ -64,7 +64,6 @@ function Profile() {
               </div>
             </div>
           </section>
-          <h3 className="body-bold md:h3-bold">Posts:</h3>
           {
             posts
             && !arePostsLoading

@@ -11,7 +11,7 @@ function AuthLayout() {
             <Outlet />
           </section>
 
-          <img loading="lazy" src="/assets/images/side-img.jpg" alt="logo" className="hidden xl:block h-screen w-1/2 object-cover bg-no-repeat" />
+          <img loading="lazy" src="/assets/images/side-img.webp" alt="logo" className="hidden xl:block h-screen w-1/2 object-cover bg-no-repeat" />
         </>
       )}
     </>

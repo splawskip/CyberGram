@@ -1,5 +1,7 @@
 [![Tech used](https://skillicons.dev/icons?i=vercel,git,github,vscode,vite,html,css,tailwind,ts,react,&theme=dark)](https://skillicons.dev)
 
+![Cybergram Preview Image](./public/assets/images/Cybergram-App-Preview.webp)
+
 # Cybergram - Embrace the Cyberpunk Universe
 
 Dive into the neon-lit streets of Night City with Cybergram, a trailblazing social media web application inspired by my love for the electrifying world of Cyberpunk 2077. This isn't just a platform; it's a portal to a realm where the boundary between reality and the virtual blurs, allowing users to immerse themselves fully in the cyberpunk ethos.
