@@ -37,36 +37,36 @@ function SignUp() {
   // Handle form submission.
   async function onSubmit(values: z.infer<typeof SignUpValidation>) : Promise<void> {
     // Create new user.
-    const newUser = await createUserAccount(values);
-    // If user wasn't created throw the toast.
-    if (!newUser) {
+    const newUser = await createUserAccount(values).catch((error) => {
       toast({
-        title: 'Sign up failed. Please try again.',
+        title: `Sign up failed. ${error.message ?? ''}`,
       });
-      // Bail
+    });
+    // Bail.
+    if (!newUser) {
       return;
     }
     // Get session.
     const session = await signInAccount({
       email: values.email,
       password: values.password,
-    });
-    // If there is no session throw the toast.
-    if (!session) {
+    }).catch((error) => {
       toast({
-        title: 'Sign in failed. Please try again.',
+        title: `Sign in failed. ${error.message ?? ''}`,
       });
-      // Bail
+    });
+    // Bail.
+    if (!session) {
       return;
     }
     // Check if authentication happened.
-    const isLoggedIn = await checkAuthUser();
-    // If login failed throw the toast.
-    if (!isLoggedIn) {
+    const isLoggedIn = await checkAuthUser().catch((error) => {
       toast({
-        title: 'Sign in failed. Please try again.',
+        title: `Sign in failed. ${error.message ?? ''}`,
       });
-      // Bail
+    });
+    // Bail.
+    if (!isLoggedIn) {
       return;
     }
     // Clear form and navigate to homepage.

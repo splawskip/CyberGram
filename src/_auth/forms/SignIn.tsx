@@ -37,23 +37,23 @@ function SignIn() {
     const session = await signInAccount({
       email: values.email,
       password: values.password,
-    });
-    // If there is no session throw the toast.
-    if (!session) {
+    }).catch((error) => {
       toast({
-        title: 'Sign in failed. Please try again.',
+        title: `Sign in failed. ${error.message ?? ''}`,
       });
-      // Bail.
+    });
+    // Bail.
+    if (!session) {
       return;
     }
     // Check if authentication happened.
-    const isLoggedIn = await checkAuthUser();
-    // If login failed throw the toast.
-    if (!isLoggedIn) {
+    const isLoggedIn = await checkAuthUser().catch((error) => {
       toast({
-        title: 'Sign in failed. Please try again.',
+        title: `Sign in failed. ${error.message ?? ''}`,
       });
-      // Bail.
+    });
+    // Bail.
+    if (!isLoggedIn) {
       return;
     }
     // Clear form and navigate to homepage.
