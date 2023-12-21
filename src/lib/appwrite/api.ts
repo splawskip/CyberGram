@@ -565,7 +565,7 @@ export async function deletePost(postId:string, imageId:string) {
  * @throws Error if unable to retrieve posts.
  */
 export async function getInfinitePosts({ pageParam }: { pageParam: string }) {
-  const queries = [Query.orderDesc('$updatedAt'), Query.limit(10)];
+  const queries = [Query.orderDesc('$updatedAt'), Query.limit(9)];
 
   if (pageParam) {
     queries.push(Query.cursorAfter(pageParam.toString()));

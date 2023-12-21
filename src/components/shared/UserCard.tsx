@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import CyberButton from '../buttons/CyberButton';
 import { UserCardProps } from '@/types';
 
 function UserCard({ user } : UserCardProps) {
@@ -16,7 +15,6 @@ function UserCard({ user } : UserCardProps) {
             @
             {user.username}
           </p>
-          <CyberButton variant="warn">Follow</CyberButton>
         </div>
       </li>
     </Link>

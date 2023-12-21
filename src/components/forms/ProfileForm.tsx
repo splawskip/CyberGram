@@ -86,10 +86,10 @@ function ProfileForm({ user }: ProfileFormProps) {
           )}
         />
         <div className="flex gap-4 items-center justify-end">
-          <CyberButton variant="cancel" disabled={isUpdating} loading={isUpdating}>
+          <CyberButton variant="cancel" disabled={isUpdating} loading={isUpdating} handler={() => navigate(-1)}>
             Cancel
           </CyberButton>
-          <CyberButton variant="accept" disabled={isUpdating} loading={isUpdating}>
+          <CyberButton isSubmit variant="accept" disabled={isUpdating} loading={isUpdating}>
             Update Profile
           </CyberButton>
         </div>

@@ -43,7 +43,7 @@ function SignIn() {
       toast({
         title: 'Sign in failed. Please try again.',
       });
-      // Bail
+      // Bail.
       return;
     }
     // Check if authentication happened.
@@ -53,7 +53,7 @@ function SignIn() {
       toast({
         title: 'Sign in failed. Please try again.',
       });
-      // Bail
+      // Bail.
       return;
     }
     // Clear form and navigate to homepage.
@@ -77,7 +77,7 @@ function SignIn() {
                 <FormControl>
                   <Input type="email" placeholder="Johny.Silverhand@cyberpunk.net" className="shad-input" {...field} />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="shad-form-message" />
               </FormItem>
             )}
           />
@@ -90,7 +90,7 @@ function SignIn() {
                 <FormControl>
                   <Input type="password" placeholder="N0futur3" className="shad-input" {...field} />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="shad-form-message" />
               </FormItem>
             )}
           />
@@ -100,7 +100,7 @@ function SignIn() {
                 <CyberLoader />
                 Loading...
               </div>
-            ) : 'Sign up'}
+            ) : 'Sign In'}
           </Button>
           <p className="text-small-regular text-light-2 text-center mt-2">
             Don&apos;t have an account?

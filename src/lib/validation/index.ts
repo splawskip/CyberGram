@@ -19,19 +19,23 @@ export const SignInValidation = z.object({
 });
 
 /**
- * Validation schema for user sign-in data.
+ * Validation schema for Post Upload.
  */
 export const PostUploadValidation = z.object({
   caption: z.string().min(5).max(2200),
-  file: z.custom<File[]>(),
+  file: z.custom<File[]>().refine((files:Array<File>) => (files.length > 0), {
+    message: 'Photo must be uploaded.',
+  }),
   location: z.string().min(2).max(100),
   tags: z.string(),
 });
 
 /**
- * Validation schema for P.
+ * Validation schema for User Update.
  */
 export const UserUpdateValidation = z.object({
-  file: z.custom<File[]>(),
+  file: z.custom<File[]>().refine((files:Array<File>) => (files.length > 0), {
+    message: 'Photo must be uploaded.',
+  }),
   bio: z.string().min(0).max(200),
 });

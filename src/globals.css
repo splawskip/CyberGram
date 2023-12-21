@@ -10,6 +10,10 @@
   body {
     @apply bg-dark-1 text-white min-h-screen subpixel-antialiased;
   }
+
+  img {
+    color: transparent;
+  }
 }
 
 @layer utilities {

@@ -123,10 +123,10 @@ function PostForm({ post, action }: PostFormProps) {
           )}
         />
         <div className="flex gap-4 items-center justify-end">
-          <CyberButton variant="cancel" disabled={isCreating || isUpdating} loading={isCreating || isUpdating}>
+          <CyberButton variant="cancel" disabled={isCreating || isUpdating} loading={isCreating || isUpdating} handler={() => navigate(-1)}>
             Cancel
           </CyberButton>
-          <CyberButton variant="accept" disabled={isCreating || isUpdating} loading={isCreating || isUpdating}>
+          <CyberButton isSubmit variant="accept" disabled={isCreating || isUpdating} loading={isCreating || isUpdating}>
             {action}
             {' '}
             Post

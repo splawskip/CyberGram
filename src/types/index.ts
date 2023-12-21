@@ -107,4 +107,6 @@ export type CyberButtonProps = {
   disabled?: boolean,
   loading?: boolean,
   variant?: 'warn' | 'cancel' | 'accept',
+  isSubmit?: boolean,
+  handler?: () => void,
 };

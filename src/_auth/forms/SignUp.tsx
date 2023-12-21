@@ -90,7 +90,7 @@ function SignUp() {
                 <FormControl>
                   <Input type="text" placeholder="The Legend" className="shad-input" {...field} />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="shad-form-message" />
               </FormItem>
             )}
           />
@@ -103,7 +103,7 @@ function SignUp() {
                 <FormControl>
                   <Input type="text" placeholder="Johny Silverhand" className="shad-input" {...field} />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="shad-form-message" />
               </FormItem>
             )}
           />
@@ -116,7 +116,7 @@ function SignUp() {
                 <FormControl>
                   <Input type="email" placeholder="Johny.Silverhand@cyberpunk.net" className="shad-input" {...field} />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="shad-form-message" />
               </FormItem>
             )}
           />
@@ -129,7 +129,7 @@ function SignUp() {
                 <FormControl>
                   <Input type="password" placeholder="N0futur3" className="shad-input" {...field} />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="shad-form-message" />
               </FormItem>
             )}
           />
